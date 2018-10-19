@@ -1,5 +1,5 @@
 Geral:
- - Check the necessity for inheritance for units (selection, movement, HUD display, etc...)
+ - Check the necessity for inheritance for units (selection, movement, HUD display, etc...) - Yes;
 
 Camera:
  - Change from fixed orthographic camera to free roaming within the game area; - Ok
@@ -29,6 +29,8 @@ Gameplay:
  - Create more diverse waves with more difficult enemies;
  - Create in-game resources;
  - Create unit selection;
+ - Build only moves when selected;
+ - Builder can ignore terrain;
 
 Interface:
  - Create an interface;
@@ -39,6 +41,12 @@ Interface:
  - Display enemy health bars on top of their heads;
  - Change HUD components;
  - Retractable HUD (Save in player prefs);
+ - Selection boxes; - Ok
+ - Selection circles on units; - Ok
+ - Change cursors on different actors; - Ok
+ - Selection circle performance; - Ok
+ - Add only for the type already in selection, even if highlights multiple types;
+ - Double click only for units within viewport;
 
 Map:
  - Beautify the map;

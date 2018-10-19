@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class HashIDs : MonoBehaviour {
+public class HashIDs : MonoBehaviour
+{
 
 	public int dyingState;
 	public int locomotionState;
