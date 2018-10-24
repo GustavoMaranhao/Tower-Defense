@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GlobalGameController : MonoBehaviour {
 
+    //[HideInInspector]
+    public List<UnitsBase> availableUnits;
+
     [HideInInspector]
     public List<UnitsBase> selectedUnits;
 
@@ -13,6 +16,12 @@ public class GlobalGameController : MonoBehaviour {
     {
         selectedUnits = new List<UnitsBase>();
         highlightedUnits = new List<UnitsBase>();
+
+        availableUnits = new List<UnitsBase>();
+        foreach (UnitsBase selectableObject in FindObjectsOfType(typeof(UnitsBase)))
+        {
+            availableUnits.AddUnitToUnitsArray(selectableObject, false);
+        }
     }
 
     void Update()

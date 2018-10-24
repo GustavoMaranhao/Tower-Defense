@@ -44,6 +44,8 @@ public class UnitsBase : MonoBehaviour, IPointerClickHandler {
     protected virtual void Start () {
         selectionCircleProjector = gameObject.GetComponentInChildren<Projector>();
         globalGameController = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<GlobalGameController>();
+
+        globalGameController.availableUnits.AddUnitToUnitsArray(this, false);
     }
 	
 	protected virtual void Update () {
@@ -89,6 +91,14 @@ public class UnitsBase : MonoBehaviour, IPointerClickHandler {
         #endregion
     }
 
+    private void OnDestroy()
+    {
+        //Arrays cleanup
+        if (globalGameController.highlightedUnits.Contains(this)) globalGameController.highlightedUnits.Remove(this);
+        if (globalGameController.selectedUnits.Contains(this)) globalGameController.selectedUnits.Remove(this);
+        if (globalGameController.availableUnits.Contains(this)) globalGameController.availableUnits.Remove(this);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         switch (eventData.clickCount)
@@ -97,14 +107,16 @@ public class UnitsBase : MonoBehaviour, IPointerClickHandler {
                 globalGameController.selectedUnits.Clear();
                 globalGameController.highlightedUnits.Clear();
 
-                globalGameController.selectedUnits.Add(this);
-                globalGameController.highlightedUnits.Add(this);
+                globalGameController.selectedUnits.AddUnitToUnitsArray(this);
+                globalGameController.highlightedUnits.AddUnitToUnitsArray(this);
                 break;
             case 2:
-                foreach (UnitsBase selectableObject in FindObjectsOfType(this.GetType()))
+                foreach (UnitsBase selectableObject in globalGameController.availableUnits)
                 {
-                    globalGameController.selectedUnits.Add(selectableObject);
-                    globalGameController.highlightedUnits.Add(selectableObject);
+                    if (!GUIUtils.IsWithinViewport(cameraRef, selectableObject.gameObject)) continue;
+
+                    globalGameController.selectedUnits.AddUnitToUnitsArray(selectableObject);
+                    globalGameController.highlightedUnits.AddUnitToUnitsArray(selectableObject);
                 }
                 break;
             default:

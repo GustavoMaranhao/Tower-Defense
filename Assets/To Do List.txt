@@ -28,9 +28,11 @@ Gameplay:
  - Create victory/loss conditions;
  - Create more diverse waves with more difficult enemies;
  - Create in-game resources;
- - Create unit selection;
- - Build only moves when selected;
+ - Create unit selection; - Ok
+ - Build only moves when selected; - Ok
  - Builder can ignore terrain;
+ - Click move particle;
+ - Stopping distance;
 
 Interface:
  - Create an interface;
@@ -45,8 +47,8 @@ Interface:
  - Selection circles on units; - Ok
  - Change cursors on different actors; - Ok
  - Selection circle performance; - Ok
- - Add only for the type already in selection, even if highlights multiple types;
- - Double click only for units within viewport;
+ - Add only for the type already in selection, even if highlights multiple types; - Ok
+ - Double click only for units within viewport; - Ok
 
 Map:
  - Beautify the map;

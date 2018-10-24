@@ -87,7 +87,7 @@ public class GUIMouseCursorController : MonoBehaviour
                 if (addToUnitSelection.Count > 0)
                 {
                     globalGameController.selectedUnits.Clear();
-                    globalGameController.selectedUnits.AddRange(addToUnitSelection);
+                    globalGameController.selectedUnits.AddUnitToUnitsArray(addToUnitSelection);
                     addToUnitSelection.Clear();
                 }
 
@@ -108,27 +108,23 @@ public class GUIMouseCursorController : MonoBehaviour
         //Mouse drag button held
         if (isMouseDragging)
         {
-            foreach (var selectableObject in FindObjectsOfType<UnitsBase>())
+            foreach (var selectableObject in globalGameController.availableUnits)
             {
                 if (IsWithinSelectionBounds(selectableObject.gameObject))
                 {
                     //Add unit to the temporary array
-                    if (!addToUnitSelection.Contains(selectableObject))
-                        addToUnitSelection.Add(selectableObject);
+                    addToUnitSelection.AddUnitToUnitsArray(selectableObject);
 
                     //Highlight the selected unit
-                    if (!globalGameController.highlightedUnits.Contains(selectableObject))
-                        globalGameController.highlightedUnits.Add(selectableObject);
+                    globalGameController.highlightedUnits.AddUnitToUnitsArray(selectableObject);
                 }
                 else
                 {
                     //Remove unit from the temporary array
-                    if (addToUnitSelection.Contains(selectableObject))
-                        addToUnitSelection.Remove(selectableObject);
+                    addToUnitSelection.RemoveUnitFromUnitsArray(selectableObject);
 
                     //Remove unit from the highlights array
-                    if (globalGameController.highlightedUnits.Contains(selectableObject))
-                        globalGameController.highlightedUnits.Remove(selectableObject); 
+                    globalGameController.highlightedUnits.RemoveUnitFromUnitsArray(selectableObject); 
 
                 }
             }
@@ -138,7 +134,7 @@ public class GUIMouseCursorController : MonoBehaviour
 
     bool IsWithinSelectionBounds(GameObject gameObject)
     {
-        var viewportBounds = GUIUtils.GetViewportBounds(mainCamera, mouseDragStart, Input.mousePosition);
+        var viewportBounds = GUIUtils.GetViewportBoundsFromWorld(mainCamera, mouseDragStart, Input.mousePosition);
         return viewportBounds.Contains(mainCamera.WorldToViewportPoint(gameObject.transform.position));
     }
 }

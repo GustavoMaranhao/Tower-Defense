@@ -35,7 +35,7 @@ public static class GUIUtils {
         GUIUtils.DrawScreenRect(new Rect(rect.xMin, rect.yMax - thickness, rect.width, thickness), color);
     }
 
-    public static Bounds GetViewportBounds(Camera camera, Vector3 screenPosition1, Vector3 screenPosition2)
+    public static Bounds GetViewportBoundsFromWorld(Camera camera, Vector3 screenPosition1, Vector3 screenPosition2)
     {
         var v1 = camera.ScreenToViewportPoint(screenPosition1);
         var v2 = camera.ScreenToViewportPoint(screenPosition2);
@@ -48,5 +48,23 @@ public static class GUIUtils {
         var bounds = new Bounds();
         bounds.SetMinMax(min, max);
         return bounds;
+    }
+
+    public static Bounds GetViewportBoundsFromViewport(Camera camera, Vector2 viewportPosition1, Vector2 viewportPosition2)
+    {
+        var min = Vector3.Min(viewportPosition1, viewportPosition2);
+        var max = Vector3.Max(viewportPosition1, viewportPosition2);
+        min.z = camera.nearClipPlane;
+        max.z = camera.farClipPlane;
+
+        var bounds = new Bounds();
+        bounds.SetMinMax(min, max);
+        return bounds;
+    }
+
+    public static bool IsWithinViewport(Camera camera, GameObject gameObject)
+    {
+        var viewportBounds = GUIUtils.GetViewportBoundsFromViewport(camera, new Vector2(0,0), new Vector2(1,1));
+        return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
     }
 }
