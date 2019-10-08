@@ -5,9 +5,10 @@
     "\\Assets\\Scripts",
     "\\Assets\\Scripts\\Enemy",
     "\\Assets\\Scripts\\Game Controller",
+    "\\Assets\\Scripts\\GUI",
     "\\Assets\\Scripts\\Player",
     "\\Assets\\Scripts\\Units"
   ],
-  "SelectedNode": "\\Assets\\Scripts\\Game Controller\\SpawnController.cs",
+  "SelectedNode": "\\Assets\\Scripts\\Player\\PlayerController.cs",
   "PreviewInSolutionExplorer": false
 }

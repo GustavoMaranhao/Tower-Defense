@@ -21,9 +21,8 @@ public class GenericPlayerController : MonoBehavior
     {
         EnemyDeathArgs args = (EnemyDeathArgs) e;
 
-        if (args.killedByTag == playerIdentifier)
-        {
-            playerGoldPool += args.goldReward;
-        }
+        if (args.killedByTag != playerIdentifier) return;
+
+        playerGoldPool = args.goldReward;
     }
 }
